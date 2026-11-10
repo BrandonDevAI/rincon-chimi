@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-crema: #f7efe3;
+  --color-arena: #ecdcc4;
+  --color-terracota: #c2552f;
+  --color-aji: #e8a33d;
+  --color-vino: #6e1f24;
+  --color-carbon: #1f1714;
+  --color-oliva: #4f5b2f;
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-jakarta);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: clip;
+  background: var(--color-crema);
+  color: var(--color-carbon);
+  font-family: var(--font-jakarta), system-ui, sans-serif;
+}
+
+/* Patrón textil andino (rombos escalonados) */
+.textil {
+  background-image:
+    linear-gradient(45deg, currentColor 25%, transparent 25%),
+    linear-gradient(-45deg, currentColor 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, currentColor 75%),
+    linear-gradient(-45deg, transparent 75%, currentColor 75%);
+  background-size: 18px 18px;
+  background-position: 0 0, 0 9px, 9px -9px, -9px 0;
+}
+
+.grano {
+  position: relative;
+}
+.grano::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee {
+  animation: marquee 30s linear infinite;
+}
+
+@keyframes flotar {
+  50% {
+    transform: translateY(-10px) rotate(-3deg);
+  }
+}
+.flotar {
+  animation: flotar 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee,
+  .flotar {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
